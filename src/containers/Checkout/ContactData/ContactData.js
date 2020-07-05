@@ -19,7 +19,8 @@ class ContactData extends React.Component {
         value: '',
         validation: {
           required: true
-        }
+        },
+        valid: false
       },
       street: {
         elementType: 'input',
@@ -30,7 +31,8 @@ class ContactData extends React.Component {
         value: '',
         validation: {
           required: true
-        }
+        },
+        valid: false
       },
       zipCode: {
         elementType: 'input',
@@ -43,7 +45,8 @@ class ContactData extends React.Component {
           required: true,
           minLength: 5,
           maxLength: 5
-        }
+        },
+        valid: false
       },
       country: {
         elementType: 'input',
@@ -53,8 +56,9 @@ class ContactData extends React.Component {
         },
         value: '',
         validation: {
-          required: false
-        }
+          required: true
+        },
+        valid: false
       },
       email: {
         elementType: 'input',
@@ -65,7 +69,8 @@ class ContactData extends React.Component {
         value: '',
         validation: {
           required: true
-        }
+        },
+        valid: false
       },
       deliveryMethod: {
         elementType: 'select',
@@ -113,7 +118,7 @@ class ContactData extends React.Component {
     }
     const updatedFormElement={...updatedOrderForm[inputIdentifier]};
     updatedFormElement.value = event.target.value;
-    updatedFormElement.validity = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+    updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
     updatedOrderForm[inputIdentifier] = updatedFormElement;
 
     console.log(updatedFormElement);
@@ -150,6 +155,8 @@ class ContactData extends React.Component {
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation}
             changed={(event)=>this.inputChangedHandler(event, formElement.id)}/>
         ))}
         <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
