@@ -19,7 +19,7 @@ class Orders extends React.Component {
             ...res.data[key]
           })
         }
-        this.setState({loading: false, order: fetchedOrders});
+        this.setState({loading: false, orders: fetchedOrders});
       })
       .catch(err=>{
         this.setState({loading: false});
@@ -29,8 +29,12 @@ class Orders extends React.Component {
   render(){
     return (
       <div>
-        <Order />
-        <Order />
+        {this.state.orders.map(order=>(
+          <Order
+            key={order.id}
+            ingredients={order.ingredients}
+            price={order.price} />
+        ))}
       </div>
     )
   }
