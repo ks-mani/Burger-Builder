@@ -23,7 +23,7 @@ class Orders extends React.Component {
     //   .catch(err=>{
     //     this.setState({loading: false});
     //   })
-    this.props.onFetchOrders();
+    this.props.onFetchOrders(this.props.token);
   }
 
   render(){
@@ -47,13 +47,14 @@ class Orders extends React.Component {
 const mapStateToProps = state => {
   return {
     orders: state.order.order,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchOrders : ()=>dispatch(actions.fetchOrders())
+    onFetchOrders : (token)=>dispatch(actions.fetchOrders(token))
   }
 }
 
