@@ -8,7 +8,7 @@ import Logout from './containers/Auth/Logout/Logout';
 import {connect} from 'react-redux'
 import * as actions from './store/actions/index'
 
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch , withRouter} from 'react-router-dom';
 
 class App extends Component {
   componentDidMount(){
@@ -37,4 +37,4 @@ const mapDispatchToProps = dispatch=>{
     }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default withRouter(connect(null, mapDispatchToProps)(App));
